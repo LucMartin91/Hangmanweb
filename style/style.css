@@ -1,0 +1,29 @@
+ .mechant {
+     text-align: center;
+     color: green;
+     padding: 7% 0;
+     font-size: 17px;
+     width: 50%;
+
+ }
+
+ .mechant>h2 {
+     font-size: 60px;
+ }
+
+ .hangman {
+     font-family: "Roboto";
+     color: blanchedalmond;
+     font-size: 45px;
+     text-align: right
+ }
+
+ body {
+     font-family: 'Sarpanch', sans-serif;
+     background-color: black;
+ }
+
+ .container {
+     display: flex;
+     gap: 5rem;
+ }

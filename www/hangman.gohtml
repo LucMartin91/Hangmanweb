@@ -1,0 +1,136 @@
+{{ define "index" }}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sarpanch&family=Teko:wght@300&display=swap" rel="stylesheet">
+
+    <title>Hangman-Web</title>
+    {{if eq .Word .ToFind }}
+    <style>
+        body {
+            background-color: #1C2833;
+            font-family: 'Sarpanch', sans-serif;
+        }
+
+        .gagner {
+            justify-content: center;
+            text-align: center;
+            color: green;
+            padding-top: 100px;
+
+        }
+
+        .gagner>boutton {
+            width: 500%;
+        }
+
+        .gagner>h1 {
+            font-size: 70px;
+        }
+    </style>
+    {{end}}
+    {{if (le .Attempts 0)}}
+    <style>
+        body {
+            background-color: #1C2833;
+            font-family: 'Sarpanch', sans-serif;
+        }
+
+        .PERDU {
+            font-size: 70px;
+            justify-content: center;
+            text-align: center;
+            color: red;
+            padding-top: 100px;
+        }
+    </style>
+    {{else}}{{if ne .Word .ToFind}}
+    <style>
+        p {
+            font-size: 20px;
+        }
+
+        .mechant {
+            text-align: center;
+            color: green;
+            padding: 7% 0;
+            font-size: 17px;
+            width: 50%;
+
+        }
+
+        .mechant>h2 {
+            font-size: 60px;
+        }
+
+        .hangman {
+            font-family: "Roboto";
+            color: blanchedalmond;
+            font-size: 45px;
+            text-align: right
+        }
+
+        body {
+            font-family: 'Sarpanch', sans-serif;
+            background-color: #1C2833;
+        }
+
+        .container {
+            display: flex;
+            gap: 5rem;
+        }
+    </style>
+    {{end}}{{end}}
+</head>
+
+<body>
+    {{if (le .Attempts 0)}}
+    <div class="PERDU">
+        <h1>GAME OVER</h1>
+        <form action="/reload">
+            <button
+                style="width:300;height:50px;background-color:red;color: white;font-weight:bold">Recommencer</button>
+        </form>
+    </div>
+    {{else}}{{if ne .Word .ToFind}}
+    <div class="container">
+        <div class="mechant">
+            <h2 style="letter-spacing: 2rem;">{{ .Word }}</h2>
+
+
+            <p>{{ .Attempts }} Attempts Remaining.</p>
+
+            <p>Choose :
+            <form method="post" action="/">
+                <input type="text" name="scanner" required>
+                <input type="submit" value="SUBMIT">
+            </form>
+            </p>
+        </div>
+        <div class="hangman">
+            <h3 style="white-space: pre-line;color:green;font-size:145%">{{ .HangmanPositions }} </h3>
+
+        </div>
+    </div>
+    {{end}}{{end}}
+    {{if eq .Word .ToFind }}
+    <div class="gagner">
+        <h1>{{ .ToFind }}</h1>
+        <h2>Congratulations !</h2>
+        <h2>You won the game.</h2>
+        <form action="/reload">
+            <button
+                style="width:300px;height:50px;background-color:green;color: white;font-weight:bold">Recommencer</button>
+        </form>
+    </div>
+    {{end}}
+
+</body>
+
+</html>
+{{ end }}
